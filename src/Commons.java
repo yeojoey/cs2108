@@ -10,7 +10,7 @@ import java.util.Set;
 public class Commons {
 	
 	private static final String CATEGORIES_FILEPATH = "ImageData/category_names.txt";
-	private static final String TAGS_FILEPATH  = "ImageData/train/train_text_tags.txt";
+	private static final String TAGS_FILEPATH  = "ImageData/test/test_text_tags.txt";
 	
 	public static Set<String> getCategories() throws IOException {
 		
@@ -48,12 +48,6 @@ public class Commons {
 		br.close();
 		
 		return tagMap;
-		
-	}
-	
-
-	
-	public static void main(String[] args) throws IOException {
 		
 	}
 	

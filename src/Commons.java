@@ -5,22 +5,22 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Commons {
 	
-	private static final String CATEGORIES_FILEPATH = "ImageData/category_names.txt";
-	private static final String TAGS_FILEPATH  = "ImageData/test/test_text_tags.txt";
+
 	
-	public static Set<String> getCategories() throws IOException {
+	public static Map<String, Set<String>> getCategories(String filepath) throws IOException {
 		
-		Set<String> categoriesSet = new HashSet<String>();
+		HashMap<String, Set<String>> categoriesSet = new HashMap<String, Set<String>>();
 		
-		BufferedReader br = new BufferedReader(new FileReader(CATEGORIES_FILEPATH));
+		BufferedReader br = new BufferedReader(new FileReader(filepath));
 		
 		String line = br.readLine();
 		while (line!= null) {
-			categoriesSet.add(line);
+			categoriesSet.put(line, new HashSet<String>());
 			line = br.readLine();
 		}
 			
@@ -30,11 +30,11 @@ public class Commons {
 		
 	}
 	
-	public static HashMap<String, Set<String>> getTags() throws FileNotFoundException, IOException {
+	public static HashMap<String, Set<String>> getTags(String filepath) throws FileNotFoundException, IOException {
 		
 		HashMap<String, Set<String>> tagMap = new HashMap<String, Set<String>>();
 		
-		BufferedReader br = new BufferedReader(new FileReader(TAGS_FILEPATH));
+		BufferedReader br = new BufferedReader(new FileReader(filepath));
 		
 		String line = br.readLine();
 		while (line!= null) {

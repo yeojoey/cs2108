@@ -13,11 +13,12 @@ public class ImageData {
 	private String filepath;
 	private Set<String> categories;
 	private Set<String> tags;
+	private double[] semanticFeatureScores;
 	
 	private double colorSimilarity;
 	private double textSimilarity;
 	private double siftSimilarity;
-	private double visualConceptSimilarity;
+	private double semanticFeatureSimilarity;
 	
 	private double[] colorHistogram;
 	private double[] siftHistogram;
@@ -53,8 +54,19 @@ public class ImageData {
 		return img;
 	}
 	
+	public double[] getSemanticFeatureScores(){
+		return semanticFeatureScores;
+	}
+	
+	public void setSemanticFeatureScores(double[] sFS){
+		this.semanticFeatureScores = sFS;
+	}
+	
 	public void setCategories(Set<String> categories) {
 		this.categories = categories;
 	}
 	
+	public void setSemanticFeatureSimilarity(double similarity){
+		this.semanticFeatureSimilarity = similarity;
+	}
 }

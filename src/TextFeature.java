@@ -11,7 +11,7 @@ public class TextFeature {
 			Set<String> intersection = new HashSet<String>(image.getTags());
 			intersection.retainAll(queryTags);
 			if (intersection.size() > 0) {
-				
+				image.setTextSimilarity(intersection.size() * baseSimilarityValue);
 			} else {
 				image.setTextSimilarity(0);
 			}

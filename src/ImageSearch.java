@@ -29,6 +29,7 @@ public class ImageSearch {
 			loadImageData(tags, categories);
 			
 			// preprocess for each indiviudal method
+			ColorHist.preprocess(images);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,13 +42,16 @@ public class ImageSearch {
 	private void loadImageData(Map<String, Set<String>> tags, Map<String, Set<String>> categories) {
 		
 		for (File folder : new File(DATASET_FILEPATH).listFiles()) {
-			File dir = new File(folder.getPath());
-			File[] files = dir.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				String filename = files[i].getName();
-				ImageData data = new ImageData(filename, files[i].getPath(), tags.get(filename));
-				data.setCategories(categories.get(filename));
-				images.put(filename, data);
+			// excludes .ds_store - extra hidden file in macs
+			if (!folder.getPath().endsWith(".DS_Store")) {
+				File dir = new File(folder.getPath());
+				File[] files = dir.listFiles();
+				for (int i = 0; i < files.length; i++) {
+					String filename = files[i].getName();
+					ImageData data = new ImageData(filename, files[i].getPath(), tags.get(filename));
+					data.setCategories(categories.get(filename));
+					images.put(filename, data);
+				}
 			}
 		}
 	}
@@ -58,6 +62,9 @@ public class ImageSearch {
 		
 		System.out.println(srch.images.get("0339_2053280825.jpg").getTags().toString());
 		
+		// testing for color histogram
+		ColorHist.computeSimilarity(srch.images, srch.images.get("0339_2053280825.jpg"));
+		System.out.println(srch.images.get("0403_204552765.jpg").getColorSimilarity());
 	}
 	
 }

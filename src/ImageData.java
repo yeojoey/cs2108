@@ -73,4 +73,20 @@ public class ImageData {
 	public void setTextSimilarity(double similarity) {
 		this.textSimilarity = similarity;
 	}
+	
+	public double[] getColorHistogram() {
+		return colorHistogram;
+	}
+	
+	public void setColorHistogram(double[] histogram) {
+		this.colorHistogram = histogram;
+	}
+	
+	public double getColorSimilarity() {
+		return colorSimilarity;
+	}
+	
+	public void setColorSimilarity(double similarity) {
+		this.colorSimilarity = similarity;
+	}
 }

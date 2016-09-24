@@ -69,4 +69,8 @@ public class ImageData {
 	public void setSemanticFeatureSimilarity(double similarity){
 		this.semanticFeatureSimilarity = similarity;
 	}
+	
+	public void setTextSimilarity(double similarity) {
+		this.textSimilarity = similarity;
+	}
 }

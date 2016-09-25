@@ -46,7 +46,7 @@ public class ImageSearch {
 			
 			// preprocess for each individual method
 			ColorHist.preprocess(images);
-			//SemanticFeature.process(images);
+			SemanticFeature.process(images);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,7 +89,7 @@ public class ImageSearch {
 				break;
 				
 			case SEMANTIC:
-				// SemanticFeature.calSimilarity(images, queryImg);
+				//SemanticFeature.calSimilarity(images, queryImg);
 				break;
 				
 			case TEXT:

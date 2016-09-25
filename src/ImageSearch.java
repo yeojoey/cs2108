@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +23,7 @@ public class ImageSearch {
 	}
 	
 	
-	public List<ImageData> search(List<SearchType> searchTypes, ImageData queryImg) {
+	public List<ImageData> search(List<SearchType> searchTypes, ImageData queryImg) throws IOException {
 		
 		calculateSimilarities(searchTypes, queryImg);
 		List<ImageData> results = rankResults(searchTypes);
@@ -62,19 +63,23 @@ public class ImageSearch {
 			// excludes .ds_store - extra hidden file in macs
 			if (!folder.getPath().endsWith(".DS_Store")) {
 				File dir = new File(folder.getPath());
+				//System.out.println(dir.getName());
 				File[] files = dir.listFiles();
+				//System.out.println(files.length);
 				for (int i = 0; i < files.length; i++) {
 					String filename = files[i].getName();
 					ImageData data = new ImageData(filename, files[i].getPath(), tags.get(filename));
 					data.setCategories(categories.get(filename));
-					images.put(filename, data);
+					if (!images.containsKey(filename)) {
+						images.put(filename, data);
+					}
 				}
 			}
 		}
 	}
 	
 	
-	private void calculateSimilarities(List<SearchType> searchTypes, ImageData queryImg) {
+	private void calculateSimilarities(List<SearchType> searchTypes, ImageData queryImg) throws IOException {
 		
 		for (SearchType searchType : searchTypes) {
 			
@@ -89,7 +94,7 @@ public class ImageSearch {
 				break;
 				
 			case SEMANTIC:
-				//SemanticFeature.calSimilarity(images, queryImg);
+				//iSemanticFeature.calSimilarity(images, queryImg);
 				break;
 				
 			case TEXT:

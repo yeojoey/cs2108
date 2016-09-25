@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,7 +22,7 @@ public class QueryProcessor {
 		loadQueryData();
 	}
 	
-	public List<ImageData> processQuery(List<SearchType> searchTypes, File queryFile) {
+	public List<ImageData> processQuery(List<SearchType> searchTypes, File queryFile) throws IOException {
 		ImageData data = getQueryImage(queryFile);
 		List<ImageData> results = is.search(searchTypes, data);
 		return results;
@@ -63,15 +64,15 @@ public class QueryProcessor {
 	
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		// testing
 		ImageSearch is = new ImageSearch();
 		QueryProcessor qp = new QueryProcessor(is);
 		List<SearchType> types = new ArrayList<SearchType>();
-		types.add(SearchType.TEXT);
-		//types.add(SearchType.COLORHIST);
-		types.add(SearchType.SEMANTIC);
+		//types.add(SearchType.TEXT);
+		types.add(SearchType.COLORHIST);
+		//types.add(SearchType.SEMANTIC);
 		File img = new File("0288_364812236.jpg");
 		List<ImageData> results = qp.processQuery(types, img);
 		System.out.println(results.get(0));

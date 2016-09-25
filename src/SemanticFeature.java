@@ -52,7 +52,7 @@ public class SemanticFeature {
     private static void createInputFile(ArrayList<String> unprocessedImages) {
     	try (BufferedWriter bw = new BufferedWriter(new FileWriter(unprocessedImagesFilePath))) {
     		for(String filePath: unprocessedImages) {
-        		bw.write(".." + File.separator + ".." + File.separator + filePath);
+        		bw.write(".." + File.separator + filePath);
         		bw.newLine();
         	}
     		bw.close();

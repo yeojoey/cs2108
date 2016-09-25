@@ -30,7 +30,7 @@ public class SemanticFeature {
 		}
 	}
 	//get all unprocessed images for preprocessing
-	private static ArrayList<String> getUnprocessedImages(HashMap<String, ImageData>imagesMap) throws FileNotFoundException{
+	private static ArrayList<String> getUnprocessedImages(HashMap<String, ImageData> imagesMap) throws FileNotFoundException{
 		ArrayList<String> unprocessedImages = new ArrayList<String>();
 		for ( ImageData imageData : imagesMap.values()){
 			String filePath = imageData.getFilepath();

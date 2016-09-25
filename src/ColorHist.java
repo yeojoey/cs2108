@@ -16,7 +16,9 @@ public class ColorHist {
 	}
 	
 	// similarity between query image and all images
-	public static void computeSimilarity(HashMap<String, ImageData> images, ImageData queryImage) {
+	public static void computeSimilarity(HashMap<String, ImageData> images, ImageData queryImage) throws IOException {
+		double[] queryHist = getHist(queryImage.getImage());
+		queryImage.setColorHistogram(queryHist);
 		double[] queryHistogram = queryImage.getColorHistogram();
 		for (ImageData image : images.values()) {
 			double similarity = computeSimilaritySingle(image.getColorHistogram(), queryHistogram);

@@ -137,7 +137,7 @@ public class SemanticFeature {
 			else{
 				for (int i=0; i<categorySize;i++){
 					if(qiScores[i] > 0 && idScores[i] > 0){
-						similarity = Math.min(qiScores[i], idScores[i]);
+						similarity += Math.min(qiScores[i], idScores[i]);
 					}
 				}
 			}

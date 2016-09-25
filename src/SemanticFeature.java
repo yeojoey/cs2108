@@ -52,7 +52,7 @@ public class SemanticFeature {
     private static void createInputFile(ArrayList<String> unprocessedImages) {
     	try (BufferedWriter bw = new BufferedWriter(new FileWriter(unprocessedImagesFilePath))) {
     		for(String filePath: unprocessedImages) {
-        		bw.write(".." + File.separator + filePath);
+        		bw.write(".." + File.separator + ".." + File.separator + filePath);
         		bw.newLine();
         	}
     		bw.close();
@@ -76,7 +76,7 @@ public class SemanticFeature {
     
 	//run exe tool file
     private static void runSemanticFeatureTool()throws IOException {
-    	ProcessBuilder pB = new ProcessBuilder(semanticFeatureEXE, unprocessedImagesFilePath);
+    	ProcessBuilder pB = new ProcessBuilder(semanticFeatureEXE, ".." + File.separator + unprocessedImagesFilePath);
     	pB.directory(new File(semanticFeatureEXEdir).getAbsoluteFile());
     	pB.redirectErrorStream(true);
     	Process process = pB.start();

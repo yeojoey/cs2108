@@ -1,7 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,6 +21,16 @@ public class ImageSearch {
 		preprocessAll();
 	}
 	
+	
+	public List<ImageData> search(List<SearchType> searchTypes, ImageData queryImg) {
+		
+		calculateSimilarities(searchTypes, queryImg);
+		List<ImageData> results = rankResults(searchTypes);
+		return results;
+		
+	}
+	
+	
 	private void preprocessAll() {
 		
 		try {
@@ -28,8 +40,9 @@ public class ImageSearch {
 			
 			loadImageData(tags, categories);
 			
-			// preprocess for each indiviudal method
+			// preprocess for each individual method
 			ColorHist.preprocess(images);
+			SemanticFeature.process(images);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,15 +69,92 @@ public class ImageSearch {
 		}
 	}
 	
-	public static void main(String[] args) {
+	
+	private void calculateSimilarities(List<SearchType> searchTypes, ImageData queryImg) {
 		
-		ImageSearch srch = new ImageSearch();
+		for (SearchType searchType : searchTypes) {
+			
+			switch (searchType) {
+			
+			case COLORHIST:
+				ColorHist.computeSimilarity(images, queryImg);
+				break;
+				
+			case SIFT:
+				// todo
+				break;
+				
+			case SEMANTIC:
+				// SemanticFeature.calSimilarity(images, queryImg);
+				break;
+				
+			case TEXT:
+				TextFeature.calculateSimilarity(images, queryImg.getTags());
+				break;
+				
+			default:
+				break;
+			
+			}
+			
+			
+		}
 		
-		System.out.println(srch.images.get("0339_2053280825.jpg").getTags().toString());
+	}
+	
+	private List<ImageData> rankResults(List<SearchType> searchTypes) {
+		List<ImageData> results = new ArrayList<ImageData>(images.values());
+		Collections.sort(results, new imageComparator(searchTypes));
+		return results;
+	}
+	
+	
+	
+	// Comparator for ranking
+	class imageComparator implements Comparator<ImageData> {
 		
-		// testing for color histogram
-		ColorHist.computeSimilarity(srch.images, srch.images.get("0339_2053280825.jpg"));
-		System.out.println(srch.images.get("0403_204552765.jpg").getColorSimilarity());
+		List<SearchType> searchTypes;
+		
+		public imageComparator(List<SearchType> searchTypes) {
+			this.searchTypes = searchTypes;
+		}
+		
+		public int compare(ImageData a, ImageData b) {
+			double simA = 0.0;
+			double simB = 0.0;
+			
+			for (SearchType searchType : searchTypes) {
+				
+				switch (searchType) {
+				
+				case COLORHIST:
+					simA += a.getColorSimilarity();
+					simB += b.getColorSimilarity();
+					break;
+				
+				case SEMANTIC:
+					// todo
+					break;
+					
+				case SIFT:
+					// todo
+					break;
+					
+				case TEXT:
+					simA += a.getTextSimilarity();
+					simB += b.getTextSimilarity();
+					break;
+					
+				default:
+					break;
+				
+				}
+				
+			}
+			
+			return simA > simB ? -1 : simA == simB ? 0 : 1;
+		}
+		
 	}
 	
 }

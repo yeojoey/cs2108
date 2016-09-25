@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,6 +20,23 @@ public class QueryProcessor {
 		loadQueryData();
 	}
 	
+	public List<ImageData> processQuery(List<SearchType> searchTypes, File queryFile) {
+		ImageData data = getQueryImage(queryFile);
+		List<ImageData> results = is.search(searchTypes, data);
+		return results;
+	}
+	
+	
+	private ImageData getQueryImage(File queryFile) {
+		String filename = queryFile.getName();
+		if (queryImages.containsKey(filename)) {
+			return queryImages.get(filename);
+		} else {
+			return new ImageData(filename, queryFile.getPath(), null);
+		}
+	}
+	
+	
 	private void loadQueryData() {
 		try {
 			Map<String, Set<String>> tags = Commons.getTags(TAGS_PATH);
@@ -31,14 +49,14 @@ public class QueryProcessor {
 	
 	private void loadQueryImageData(Map<String, Set<String>> tags, Map<String, Set<String>> categories) {
 		for (File folder : new File(DATASET_PATH).listFiles()) {
-			String catName = folder.getName();
 			for (File file : folder.listFiles()) {
-				String filename = file.getName();
+				String fileName = file.getName();
+				ImageData id = new ImageData(fileName, file.getPath(), tags.get(fileName));
+				id.setCategories(categories.get(fileName));
 			}
 			
 		}
 	}
-	
 	
 	
 	// Since there is no categories.txt for the test images
@@ -49,6 +67,10 @@ public class QueryProcessor {
 			categories.put(catName, new HashSet<String>());
 		}
 		return categories;
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 	
 

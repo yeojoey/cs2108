@@ -60,12 +60,14 @@ public class QueryProcessor {
 	
 	private void loadQueryImageData(Map<String, Set<String>> tags, Map<String, Set<String>> categories) {
 		for (File folder : new File(DATASET_PATH).listFiles()) {
-			for (File file : folder.listFiles()) {
-				String fileName = file.getName();
-				if (fileName.endsWith("jpg")) {
-					ImageData id = new ImageData(fileName, file.getPath(), tags.get(fileName));
-					id.setCategories(categories.get(fileName));
-					queryImages.put(fileName, id);
+			if (!folder.getAbsolutePath().endsWith(".DS_Store")) {
+				for (File file : folder.listFiles()) {
+					String fileName = file.getName();
+					if (fileName.endsWith("jpg")) {
+						ImageData id = new ImageData(fileName, file.getPath(), tags.get(fileName));
+						id.setCategories(categories.get(fileName));
+						queryImages.put(fileName, id);
+					}
 				}
 			}
 		}
@@ -116,8 +118,11 @@ public class QueryProcessor {
         return metrics;
 		
 	}
-	
-	
+
+	public double[] getF1() {
+		return f1Values;
+	}
+
 	public static void main(String[] args) throws IOException {
 		
 		// testing
@@ -135,6 +140,4 @@ public class QueryProcessor {
 
 		
 	}
-	
-
 }

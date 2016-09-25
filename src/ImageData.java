@@ -102,4 +102,7 @@ public class ImageData {
 		return "----\nfilename: " + filename + "\ntags: " + tags + "\ncategories: "+ categories + "\ntext: " + textSimilarity + "\ncolorhist: " + colorSimilarity + "\nsemantic: " + semanticFeatureSimilarity;
 	}
 	
+	public String toLabelText() {
+		return "<html>Filename: " + filename + "<br>Tags: " + tags + "<br>Categories: " + categories + "<br>Text: " + textSimilarity + "<br>Color Histogram: " + colorSimilarity + "<br>Semantic Feature: " + semanticFeatureSimilarity + "</html>";
+	}
 }

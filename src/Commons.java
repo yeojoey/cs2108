@@ -19,12 +19,14 @@ public class Commons {
 
 		for (File folder : new File(filepath).listFiles()) {
 			String catName = folder.getName();
-			for (File img : folder.listFiles()) {
-				String imgName = img.getName();
-				if (!categoriesSet.containsKey(imgName)) {
-					categoriesSet.put(imgName, new HashSet<String>());
+			if (!catName.endsWith(".DS_Store")) {
+				for (File img : folder.listFiles()) {
+					String imgName = img.getName();
+					if (!categoriesSet.containsKey(imgName)) {
+						categoriesSet.put(imgName, new HashSet<String>());
+					}
+					categoriesSet.get(imgName).add(catName);
 				}
-				categoriesSet.get(imgName).add(catName);
 			}
 		}
 		

@@ -41,7 +41,7 @@ public class QueryProcessor {
 	private void loadQueryData() {
 		try {
 			Map<String, Set<String>> tags = Commons.getTags(TAGS_PATH);
-			Map<String, Set<String>> categories = getCategories();
+			Map<String, Set<String>> categories = Commons.getCategories(DATASET_PATH);
 			loadQueryImageData(tags, categories);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,18 +60,15 @@ public class QueryProcessor {
 	}
 	
 	
-	// Since there is no categories.txt for the test images
-	private Map<String, Set<String>> getCategories() {
-		Map<String, Set<String>> categories = new HashMap<String, Set<String>>();
-		for (File folder : new File(DATASET_PATH).listFiles()) {
-			String catName = folder.getName();
-			categories.put(catName, new HashSet<String>());
-		}
-		return categories;
-	}
+
 	
 	public static void main(String[] args) {
+	
+		QueryProcessor qp = new QueryProcessor(new ImageSearch());
+		List<SearchType> types = new ArrayList<SearchType>();
 		
+		//List<ImageData> results = qp.processQuery(types, new File("ImageData/test.jpg"));
+		//System.out.println(results.get(0).getFilename());
 
 		
 	}

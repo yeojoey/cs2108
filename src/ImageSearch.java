@@ -36,7 +36,7 @@ public class ImageSearch {
 		try {
 			
 			Map<String, Set<String>> tags = Commons.getTags(TAGS_FILEPATH);
-			Map<String, Set<String>> categories = Commons.getCategories(CATEGORIES_FILEPATH);
+			Map<String, Set<String>> categories = Commons.getCategories(DATASET_FILEPATH);
 			
 			loadImageData(tags, categories);
 			

@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class QueryProcessor {
 	
-	private static final String DATASET_PATH = "ImageData/test/data";
-	private static final String TAGS_PATH = "ImageData/test/test_text_tags.txt";
+	private static final String DATASET_PATH = "../ImageData/test/data";
+	private static final String TAGS_PATH = "../ImageData/test/test_text_tags.txt";
 	
 	Map<String, ImageData> queryImages;
 	ImageSearch is;
@@ -36,6 +36,7 @@ public class QueryProcessor {
 			return new ImageData(filename, queryFile.getPath(), null);
 		}
 	}
+
 	
 	
 	private void loadQueryData() {
@@ -63,13 +64,18 @@ public class QueryProcessor {
 
 	
 	public static void main(String[] args) {
-	
-		QueryProcessor qp = new QueryProcessor(new ImageSearch());
-		List<SearchType> types = new ArrayList<SearchType>();
 		
-		//List<ImageData> results = qp.processQuery(types, new File("ImageData/test.jpg"));
-		//System.out.println(results.get(0).getFilename());
-
+		// testing
+//		ImageSearch is = new ImageSearch();
+//		QueryProcessor qp = new QueryProcessor(is);
+//		List<SearchType> types = new ArrayList<SearchType>();
+//		types.add(SearchType.TEXT);
+//		//types.add(SearchType.COLORHIST);
+//		//types.add(SearchType.SEMANTIC);
+//		File img = new File("ImageData/test/data/0001_439648413.jpg");
+//		System.out.println(img.getName());
+//		System.out.println(queryImages.containsKey(img.getName()));
+//		//List<ImageData> results = qp.processQuery(types, new File("ImageData/test/data/0001_439648413.jpg"));
 		
 	}
 	

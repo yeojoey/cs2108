@@ -10,6 +10,13 @@ public class TextFeature {
 		for (ImageData image : images.values()) {
 			Set<String> intersection = new HashSet<String>(image.getTags());
 			intersection.retainAll(queryTags);
+			
+			System.out.println(image.getTags());
+			System.out.println(queryTags);
+			System.out.println(intersection);
+			System.out.println("---");
+			
+			
 			if (intersection.size() > 0) {
 				image.setTextSimilarity(intersection.size() * baseSimilarityValue);
 			} else {

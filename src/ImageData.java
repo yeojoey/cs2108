@@ -94,4 +94,8 @@ public class ImageData {
 		this.colorSimilarity = similarity;
 	}
 	
+	public String toString() {
+		return "----\nfilename: " + filename + "\ntags: " + tags + "\ncategories: "+ categories + "\ntext: " + textSimilarity + "\ncolorhist: " + colorSimilarity;
+	}
+	
 }

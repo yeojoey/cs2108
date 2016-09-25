@@ -9,9 +9,9 @@ import java.util.Set;
 
 public class ImageSearch {
 	
-	private static final String DATASET_FILEPATH = "ImageData/train/data";
-	private static final String CATEGORIES_FILEPATH = "ImageData/category_names.txt";
-	private static final String TAGS_FILEPATH  = "ImageData/train/train_text_tags.txt";
+	private static final String DATASET_FILEPATH = "../ImageData/train/data";
+	private static final String CATEGORIES_FILEPATH = "../ImageData/category_names.txt";
+	private static final String TAGS_FILEPATH  = "../ImageData/train/train_text_tags.txt";
 	
 	private HashMap<String, ImageData> images;
 	
@@ -28,6 +28,10 @@ public class ImageSearch {
 		List<ImageData> results = rankResults(searchTypes);
 		return results;
 		
+	}
+	
+	public Map<String, ImageData> getImages() {
+		return images;
 	}
 	
 	

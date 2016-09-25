@@ -73,10 +73,12 @@ public class ImageSearch {
 				//System.out.println(files.length);
 				for (int i = 0; i < files.length; i++) {
 					String filename = files[i].getName();
-					ImageData data = new ImageData(filename, files[i].getPath(), tags.get(filename));
-					data.setCategories(categories.get(filename));
-					if (!images.containsKey(filename)) {
-						images.put(filename, data);
+					if (filename.endsWith("jpg")){
+						ImageData data = new ImageData(filename, files[i].getPath(), tags.get(filename));
+						data.setCategories(categories.get(filename));
+						if (!images.containsKey(filename)) {
+							images.put(filename, data);
+						}
 					}
 				}
 			}
@@ -99,7 +101,7 @@ public class ImageSearch {
 				break;
 				
 			case SEMANTIC:
-				//iSemanticFeature.calSimilarity(images, queryImg);
+				SemanticFeature.calSimilarity(images, queryImg);
 				break;
 				
 			case TEXT:
@@ -147,7 +149,8 @@ public class ImageSearch {
 					break;
 				
 				case SEMANTIC:
-					// todo
+					simA += a.getSemanticFeatureSimilarity();
+					simB += b.getSemanticFeatureSimilarity();
 					break;
 					
 				case SIFT:

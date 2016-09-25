@@ -119,8 +119,8 @@ public class QueryProcessor {
 		List<SearchType> types = new ArrayList<SearchType>();
 		types.add(SearchType.TEXT);
 		types.add(SearchType.COLORHIST);
-		//types.add(SearchType.SEMANTIC);
-		File img = new File("0092_2019123562.jpg");
+		types.add(SearchType.SEMANTIC);
+		File img = new File("0346_2377718713.jpg");
 		List<ImageData> results = qp.processQuery(types, img);
 		System.out.println(results.get(0));
 		System.out.println(results.get(1));

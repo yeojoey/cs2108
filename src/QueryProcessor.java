@@ -62,9 +62,11 @@ public class QueryProcessor {
 		for (File folder : new File(DATASET_PATH).listFiles()) {
 			for (File file : folder.listFiles()) {
 				String fileName = file.getName();
-				ImageData id = new ImageData(fileName, file.getPath(), tags.get(fileName));
-				id.setCategories(categories.get(fileName));
-				queryImages.put(fileName, id);
+				if (fileName.endsWith("jpg")) {
+					ImageData id = new ImageData(fileName, file.getPath(), tags.get(fileName));
+					id.setCategories(categories.get(fileName));
+					queryImages.put(fileName, id);
+				}
 			}
 		}
 	}

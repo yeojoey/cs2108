@@ -115,7 +115,8 @@ public class SemanticFeature {
 	}
 	
 	//calculate similarity between the query image and all images in the database
-	public static void calSimilarity(ArrayList<ImageData> images,ImageData queryImage) throws IOException{
+	public static void calSimilarity(HashMap<String, ImageData> imagesMap,ImageData queryImage) throws IOException{
+		ArrayList<ImageData> images =new ArrayList<ImageData>(imagesMap.values());
 		String qISemanticFeatureFilePath = createTextFilePath(queryImage.getFilepath());
 		File qISemanticFeatureFile = new File(qISemanticFeatureFilePath);
 		if(!qISemanticFeatureFile.exists()){ //has not been processed

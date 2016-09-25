@@ -55,7 +55,11 @@ public class ImageData {
 	}
 	
 	public double[] getSemanticFeatureScores(){
-		return semanticFeatureScores;
+		return this.semanticFeatureScores;
+	}
+	
+	public double getSemanticFeatureSimilarity(){
+		return this.semanticFeatureSimilarity;
 	}
 	
 	public void setSemanticFeatureScores(double[] sFS){

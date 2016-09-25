@@ -95,7 +95,7 @@ public class ImageData {
 	}
 	
 	public String toString() {
-		return "----\nfilename: " + filename + "\ntags: " + tags + "\ncategories: "+ categories + "\ntext: " + textSimilarity + "\ncolorhist: " + colorSimilarity;
+		return "----\nfilename: " + filename + "\ntags: " + tags + "\ncategories: "+ categories + "\ntext: " + textSimilarity + "\ncolorhist: " + colorSimilarity + "\nsemantic: " + semanticFeatureSimilarity;
 	}
 	
 }

@@ -55,8 +55,8 @@ public class QueryProcessor {
 				String fileName = file.getName();
 				ImageData id = new ImageData(fileName, file.getPath(), tags.get(fileName));
 				id.setCategories(categories.get(fileName));
+				queryImages.put(fileName, id);
 			}
-			
 		}
 	}
 	
@@ -66,16 +66,15 @@ public class QueryProcessor {
 	public static void main(String[] args) {
 		
 		// testing
-//		ImageSearch is = new ImageSearch();
-//		QueryProcessor qp = new QueryProcessor(is);
-//		List<SearchType> types = new ArrayList<SearchType>();
-//		types.add(SearchType.TEXT);
-//		//types.add(SearchType.COLORHIST);
-//		//types.add(SearchType.SEMANTIC);
-//		File img = new File("ImageData/test/data/0001_439648413.jpg");
-//		System.out.println(img.getName());
-//		System.out.println(queryImages.containsKey(img.getName()));
-//		//List<ImageData> results = qp.processQuery(types, new File("ImageData/test/data/0001_439648413.jpg"));
+		ImageSearch is = new ImageSearch();
+		QueryProcessor qp = new QueryProcessor(is);
+		List<SearchType> types = new ArrayList<SearchType>();
+		types.add(SearchType.TEXT);
+		//types.add(SearchType.COLORHIST);
+		types.add(SearchType.SEMANTIC);
+		File img = new File("0288_364812236.jpg");
+		List<ImageData> results = qp.processQuery(types, img);
+		System.out.println(results.get(0));
 		
 	}
 	

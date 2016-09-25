@@ -48,7 +48,6 @@ public class ImageSearchUI extends JFrame {
 	private JCheckBox colorCheckBox;
 	private JCheckBox textCheckBox;
 	private JCheckBox semanticCheckBox;
-	private JCheckBox siftCheckBox;
 	
 	private ImageIcon imageIcon;
 	
@@ -84,7 +83,6 @@ public class ImageSearchUI extends JFrame {
 		colorCheckBox = new JCheckBox("Color histogram");
 		textCheckBox = new JCheckBox("Text");
 		semanticCheckBox = new JCheckBox("Semantic feature");
-		siftCheckBox = new JCheckBox("SIFT");
 		
 		checkBoxItemListener = new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -100,9 +98,6 @@ public class ImageSearchUI extends JFrame {
 						selectedFeatures--;
 					} else if (item == semanticCheckBox) {
 						types.remove(SearchType.SEMANTIC);
-						selectedFeatures--;
-					} else if (item == siftCheckBox) {
-						types.remove(SearchType.SIFT);
 						selectedFeatures--;
 					}
 					
@@ -120,10 +115,6 @@ public class ImageSearchUI extends JFrame {
 						searchBtn.setEnabled(true);
 					} else if (item == semanticCheckBox) {
 						types.add(SearchType.SEMANTIC);
-						selectedFeatures++;
-						searchBtn.setEnabled(true);
-					} else if (item == siftCheckBox) {
-						types.add(SearchType.SIFT);
 						selectedFeatures++;
 						searchBtn.setEnabled(true);
 					}
@@ -193,15 +184,13 @@ public class ImageSearchUI extends JFrame {
 		colorCheckBox.addItemListener(checkBoxItemListener);
 		textCheckBox.addItemListener(checkBoxItemListener);
 		semanticCheckBox.addItemListener(checkBoxItemListener);
-		siftCheckBox.addItemListener(checkBoxItemListener);
 		
 		featuresOptionPanel.setLayout(new BoxLayout(featuresOptionPanel, BoxLayout.Y_AXIS));
 		featuresOptionPanel.setBorder(BorderFactory.createTitledBorder("Select features:"));
-		featuresOptionPanel.setPreferredSize(new Dimension(150, 120));
+		featuresOptionPanel.setPreferredSize(new Dimension(150, 100));
 		featuresOptionPanel.add(colorCheckBox);
 		featuresOptionPanel.add(textCheckBox);
 		featuresOptionPanel.add(semanticCheckBox);
-		featuresOptionPanel.add(siftCheckBox);
 		
 		searchBtn.setEnabled(false);
 		searchBtn.addActionListener(new ActionListener() {
@@ -227,7 +216,7 @@ public class ImageSearchUI extends JFrame {
 		});
 		
 		f1Label.setPreferredSize(new Dimension(180, 70));
-		scrollPane.setPreferredSize(new Dimension(180, 200));
+		scrollPane.setPreferredSize(new Dimension(180, 240));
 		
 		// side panel
 		sidePanel.setPreferredSize(new Dimension(200, 700));

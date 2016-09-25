@@ -48,9 +48,9 @@ public class Tester {
 	public static void main(String[] args) throws IOException {
 
 		Tester t = new Tester();
-		System.out.println(Arrays.toString("Avg Text: " + t.testSingleFeature(SearchType.TEXT)));
-		System.out.println(Arrays.toString("Avg ColorHist: " + t.testSingleFeature(SearchType.COLORHIST)));
-		//System.out.println(Arrays.toString("Avg Semantic: " + t.testSingleFeature(SearchType.SEMANTIC));
+		System.out.println("Avg Text: " +  Arrays.toString(t.testSingleFeature(SearchType.TEXT)));
+		System.out.println("Avg ColorHist: " +  Arrays.toString(t.testSingleFeature(SearchType.COLORHIST)));
+		//System.out.println("Avg Semantic: " + Arrays.toString(t.testSingleFeature(SearchType.SEMANTIC));
 	}
 
 }

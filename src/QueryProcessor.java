@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -7,8 +8,8 @@ import java.util.Set;
 
 public class QueryProcessor {
 	
-	private static final String DATASET_PATH = "ImageData/data";
-	private static final String TAGS_PATH = "ImageData/test_text_tags.txt";
+	private static final String DATASET_PATH = "ImageData/test/data";
+	private static final String TAGS_PATH = "ImageData/test/test_text_tags.txt";
 	
 	Map<String, ImageData> queryImages;
 	ImageSearch is;
@@ -70,6 +71,8 @@ public class QueryProcessor {
 	}
 	
 	public static void main(String[] args) {
+		
+
 		
 	}
 	

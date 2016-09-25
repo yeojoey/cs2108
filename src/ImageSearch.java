@@ -42,7 +42,7 @@ public class ImageSearch {
 			
 			// preprocess for each individual method
 			ColorHist.preprocess(images);
-			SemanticFeature.process(images);
+			//SemanticFeature.process(images);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

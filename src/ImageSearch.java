@@ -14,6 +14,8 @@ public class ImageSearch {
 	private static final String CATEGORIES_FILEPATH = "../ImageData/category_names.txt";
 	private static final String TAGS_FILEPATH  = "../ImageData/train/train_text_tags.txt";
 	
+	private static final int RESULT_SIZE = 16;
+	
 	private HashMap<String, ImageData> images;
 	
 	// Constructor
@@ -22,6 +24,9 @@ public class ImageSearch {
 		preprocessAll();
 	}
 	
+	public int getResultSize() {
+		return RESULT_SIZE;
+	}
 	
 	public List<ImageData> search(List<SearchType> searchTypes, ImageData queryImg) throws IOException {
 		

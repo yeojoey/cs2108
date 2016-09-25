@@ -25,6 +25,7 @@ public class QueryProcessor {
 	public List<ImageData> processQuery(List<SearchType> searchTypes, File queryFile) throws IOException {
 		ImageData data = getQueryImage(queryFile);
 		List<ImageData> results = is.search(searchTypes, data);
+		calculateF1(results, data);
 		return results;
 	}
 	
@@ -61,6 +62,52 @@ public class QueryProcessor {
 		}
 	}
 	
+	private double[] calculateF1(List<ImageData> results, ImageData id) {
+		double metrics[] = new double[3];
+		double truePositives = 0;
+		Map<String, Integer> count = new HashMap<String, Integer>();
+		for (int i = 0; i < is.getResultSize(); i++) {
+			Set<String> categories = results.get(i).getCategories();
+			Set<String> intersection = new HashSet<String>(categories);
+			if (id.getCategories() != null) {
+				intersection.retainAll(id.getCategories());
+			}
+			if (intersection.size() > 0) {
+				truePositives ++;
+			}
+			for (String category : categories) {
+				if (!count.containsKey(category)) {
+					count.put(category, 0);
+				}
+				count.put(category, count.get(category) + 1);
+			}
+		}
+		
+        System.out.println("Input image has categories: " + id.getCategories());
+        System.out.println("Input image has tags: " + id.getTags());
+        System.out.println("Query results come from the following categories:");
+        for(String category: count.keySet()){
+            System.out.printf("Category: %s, Count: %s\n", category, count.get(category));
+        }
+        
+        double totalRelevant = 20;
+        double totalSelected = is.getResultSize();
+        double precision = truePositives / totalSelected;
+        double recall = truePositives / totalRelevant;
+        double f1;
+        if (!((precision + recall) == 0.0)) {
+           f1 = 2 * ((precision * recall) / (precision + recall));
+        } else {
+           f1 = 0.0;
+        }
+        System.out.printf("Precision: %s, Recall: %s, F1: %s\n", precision, recall, f1);
+        metrics[0] = precision;
+        metrics[1] = recall;
+        metrics[2] = f1;
+        return metrics;
+		
+	}
+	
 	
 
 	
@@ -70,12 +117,15 @@ public class QueryProcessor {
 		ImageSearch is = new ImageSearch();
 		QueryProcessor qp = new QueryProcessor(is);
 		List<SearchType> types = new ArrayList<SearchType>();
-		//types.add(SearchType.TEXT);
+		types.add(SearchType.TEXT);
 		types.add(SearchType.COLORHIST);
 		//types.add(SearchType.SEMANTIC);
-		File img = new File("0288_364812236.jpg");
+		File img = new File("0092_2019123562.jpg");
 		List<ImageData> results = qp.processQuery(types, img);
 		System.out.println(results.get(0));
+		System.out.println(results.get(1));
+		System.out.println(results.get(2));
+
 		
 	}
 	

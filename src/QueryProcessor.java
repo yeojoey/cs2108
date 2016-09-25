@@ -14,6 +14,7 @@ public class QueryProcessor {
 	
 	Map<String, ImageData> queryImages;
 	ImageSearch is;
+	double[] f1Values;
 	
 	// Constructor
 	public QueryProcessor(ImageSearch is) {
@@ -25,8 +26,16 @@ public class QueryProcessor {
 	public List<ImageData> processQuery(List<SearchType> searchTypes, File queryFile) throws IOException {
 		ImageData data = getQueryImage(queryFile);
 		List<ImageData> results = is.search(searchTypes, data);
-		calculateF1(results, data);
+		f1Values = calculateF1(results, data);
 		return results;
+	}
+	
+	public Map<String, ImageData> getQueryImages() {
+		return queryImages;
+	}
+	
+	public double[] getF1Values() {
+		return f1Values;
 	}
 	
 	
@@ -38,8 +47,6 @@ public class QueryProcessor {
 			return new ImageData(filename, queryFile.getPath(), null);
 		}
 	}
-
-	
 	
 	private void loadQueryData() {
 		try {
@@ -83,12 +90,12 @@ public class QueryProcessor {
 			}
 		}
 		
-        System.out.println("Input image has categories: " + id.getCategories());
-        System.out.println("Input image has tags: " + id.getTags());
-        System.out.println("Query results come from the following categories:");
-        for(String category: count.keySet()){
-            System.out.printf("Category: %s, Count: %s\n", category, count.get(category));
-        }
+//        System.out.println("Input image has categories: " + id.getCategories());
+//        System.out.println("Input image has tags: " + id.getTags());
+//        System.out.println("Query results come from the following categories:");
+//        for(String category: count.keySet()){
+//            System.out.printf("	Category: %s, Count: %s\n", category, count.get(category));
+//        }
         
         double totalRelevant = 20;
         double totalSelected = is.getResultSize();
@@ -100,7 +107,7 @@ public class QueryProcessor {
         } else {
            f1 = 0.0;
         }
-        System.out.printf("Precision: %s, Recall: %s, F1: %s\n", precision, recall, f1);
+        //System.out.printf("Precision: %s / Recall: %s / F1: %s\n", precision, recall, f1);
         metrics[0] = precision;
         metrics[1] = recall;
         metrics[2] = f1;
@@ -108,8 +115,6 @@ public class QueryProcessor {
 		
 	}
 	
-	
-
 	
 	public static void main(String[] args) throws IOException {
 		

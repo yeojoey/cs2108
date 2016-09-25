@@ -29,7 +29,6 @@ public class ImageSearch {
 	}
 	
 	public List<ImageData> search(List<SearchType> searchTypes, ImageData queryImg) throws IOException {
-		
 		calculateSimilarities(searchTypes, queryImg);
 		List<ImageData> results = rankResults(searchTypes);
 		return results;
